@@ -17,7 +17,7 @@ public class Parent {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long idParent;
+    private Long id;
 
     private String name;
 
@@ -29,16 +29,7 @@ public class Parent {
 
 //    @OneToMany
 //    private List<Student> students = new ArrayList<>();
-//
 //    @OneToOne(orphanRemoval = true)
 //    @JoinColumn(name = "pesel_ID")
 //    private Student pesel;
-//
-//    public Student getPesel() {
-//        return pesel;
-//    }
-//
-//    public void setPesel(Student pesel) {
-//        this.pesel = pesel;
-//    }
 }

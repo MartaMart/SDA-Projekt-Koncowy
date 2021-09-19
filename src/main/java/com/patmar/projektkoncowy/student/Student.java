@@ -20,22 +20,16 @@ public class Student {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    private String pesel;
-
     private String name;
 
     private String surname;
 
     private String email;
 
-
+    private String pesel;
 
 //  @OneToOne(mappedBy = "pesel")
 //  @JoinColumn(name = "parent")
 //        private Parent parent;
 //
-
-
-
-
 }

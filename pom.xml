@@ -21,7 +21,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-<!--        <dependency>-->
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;  SDA-4 dependency temporarly commented - spring security not needed for now (use it in later sprint)-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--        </dependency>-->
@@ -50,13 +50,12 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--       <dependency>-->
-<!--            <groupId>org.springframework.security</groupId>-->
-<!--          <artifactId>spring-security-test</artifactId>-->
-<!--          <scope>test</scope>-->
-<!--        </dependency> -->
+       <dependency>
+            <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-test</artifactId>
+          <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -73,5 +72,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
