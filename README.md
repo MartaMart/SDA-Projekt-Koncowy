@@ -1,5 +1,7 @@
 #SCHOOL DIARY
+
 ###Project description
+
 ###Configuration
 
 In order to connect to your database (on production profile) you have to execute the following steps:
@@ -18,4 +20,5 @@ In the 'Name' column write the same words:
 In the 'Value' column write specific data according to your database. 
 
 After that click OK, Apply and OK.
+
 ###Functionalities
