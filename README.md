@@ -1,8 +1,8 @@
-#SCHOOL DIARY
+# SCHOOL DIARY
 
-###Project description
+### Project description
 
-###Configuration
+### Configuration
 
 In order to connect to your database (on production profile) you have to execute the following steps:
 1. In IntelliJ go to Run->Edit Configurations...
@@ -21,4 +21,4 @@ In the 'Value' column write specific data according to your database.
 
 After that click OK, Apply and OK.
 
-###Functionalities
+### Functionalities
