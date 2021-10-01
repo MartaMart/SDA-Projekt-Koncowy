@@ -1,12 +1,8 @@
-package com.patmar.projektkoncowy.student;
+package com.patmar.projektkoncowy.person.student;
 
+import com.patmar.projektkoncowy.person.student.request.StudentCreateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.List;
 
 
 @Service
@@ -23,10 +19,15 @@ public class StudentService {
 //    public void findAll(List<Student>) {
 //
 //    }
-    public void updateStudent(Student student) {
+    public void updateStudent(StudentDto studentDto) {
+
         repository.save(student);
     }
-    public void deleteStudent(Student student) {
-        repository.delete(student);
+    public void deleteStudent(Long id) {
+        repository.delete(id);
+    }
+
+    public void createStudent(StudentDto studentDto) {
+
     }
 }
