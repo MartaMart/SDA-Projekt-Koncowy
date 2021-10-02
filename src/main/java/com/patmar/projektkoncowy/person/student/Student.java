@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Table(name = "students")
+@Builder
 public class Student extends EntityBase {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

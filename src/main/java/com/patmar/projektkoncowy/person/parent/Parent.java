@@ -15,6 +15,7 @@ import java.util.List;
 @Setter
 @Getter
 @Table(name = "parents")
+@Builder
 public class Parent extends EntityBase {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
