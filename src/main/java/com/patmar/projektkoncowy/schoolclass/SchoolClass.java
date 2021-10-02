@@ -1,11 +1,13 @@
 package com.patmar.projektkoncowy.schoolclass;
 
-import com.patmar.projektkoncowy.timetable.Timetable;
+import com.patmar.projektkoncowy.student.Student;
+import com.patmar.projektkoncowy.subject.Subject;
+import com.patmar.projektkoncowy.teacher.Teacher;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,10 +22,13 @@ public class SchoolClass {
 
     private String gradeLevel;
 
-    @OneToMany(mappedBy = "schoolClass")
-    private List<Timetable> timetableList = new ArrayList<>();
+    @OneToOne(mappedBy = "schoolClass")
+    private Teacher teacher;
 
-    public SchoolClass(String gradeLevel) {
-        this.gradeLevel = gradeLevel;
-    }
+    @OneToMany(mappedBy = "schoolClass")
+    private List<Student> students;
+
+    @OneToMany(mappedBy = "schoolClass")
+    private List<Subject> subjects;
+
 }

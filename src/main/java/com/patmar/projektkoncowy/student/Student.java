@@ -1,4 +1,4 @@
-package com.patmar.projektkoncowy.teacher;
+package com.patmar.projektkoncowy.student;
 
 import com.patmar.projektkoncowy.configuration.Role;
 import com.patmar.projektkoncowy.schoolclass.SchoolClass;
@@ -10,11 +10,11 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "teachers")
+@Table(name = "students")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Teacher {
+public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,15 +22,19 @@ public class Teacher {
 
     private String name;
     private String surname;
-    private String phoneNumber;
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault(value = "'ROLE_TEACHER'")
+    @ColumnDefault(value = "'ROLE_STUDENT'")
     private Role role;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     private SchoolClass schoolClass;
 
+    public Student(String name, String surname, String email) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
 }
