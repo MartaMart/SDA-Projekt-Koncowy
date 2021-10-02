@@ -21,10 +21,7 @@ public class Subject {
     @Column(nullable = false, unique = true)
     private String subjectName;
 
-
     @ManyToOne
-    @JoinColumn(name = "schoolClass_id")
+    @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
-
-
 }

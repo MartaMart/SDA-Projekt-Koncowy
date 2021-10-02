@@ -11,18 +11,19 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "school_classes")
+@Table(name = "classes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class SchoolClass {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Short id;
 
     private String gradeLevel;
 
-    @OneToOne(mappedBy = "schoolClass")
+    @OneToOne
     private Teacher teacher;
 
     @OneToMany(mappedBy = "schoolClass")
@@ -30,5 +31,4 @@ public class SchoolClass {
 
     @OneToMany(mappedBy = "schoolClass")
     private List<Subject> subjects;
-
 }

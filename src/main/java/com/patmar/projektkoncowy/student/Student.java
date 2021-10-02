@@ -29,7 +29,7 @@ public class Student {
     private Role role;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
 
     public Student(String name, String surname, String email) {

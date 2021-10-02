@@ -30,7 +30,6 @@ public class Teacher {
     private Role role;
 
     @OneToOne
-    @JoinColumn
+    @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
-
 }
