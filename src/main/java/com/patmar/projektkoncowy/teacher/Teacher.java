@@ -1,11 +1,11 @@
 package com.patmar.projektkoncowy.teacher;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.patmar.projektkoncowy.configuration.Role;
 import com.patmar.projektkoncowy.schoolclass.SchoolClass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -26,10 +26,20 @@ public class Teacher {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault(value = "'ROLE_TEACHER'")
+    @JsonIgnore
     private Role role;
 
     @OneToOne
     @JoinColumn(name = "class_id")
+    @JsonIgnore
     private SchoolClass schoolClass;
+
+    public Teacher(String name, String surname, String phoneNumber, String email, SchoolClass schoolClass) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.schoolClass = schoolClass;
+    }
+
 }

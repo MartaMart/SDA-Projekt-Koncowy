@@ -1,5 +1,6 @@
 package com.patmar.projektkoncowy.schoolclass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.patmar.projektkoncowy.student.Student;
 import com.patmar.projektkoncowy.subject.Subject;
 import com.patmar.projektkoncowy.teacher.Teacher;
@@ -8,27 +9,41 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "classes")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class SchoolClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Short id;
+    private Long id;
 
     private String gradeLevel;
 
-    @OneToOne
+    @OneToOne(mappedBy = "schoolClass", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "schoolClass")
-    private List<Student> students;
+    @OneToMany(
+            mappedBy = "schoolClass",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Student> students;
 
-    @OneToMany(mappedBy = "schoolClass")
-    private List<Subject> subjects;
+    @OneToMany(
+            mappedBy = "schoolClass",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private Set<Subject> subjects;
+
+    public SchoolClass(String gradeLevel) {
+        this.gradeLevel = gradeLevel;
+    }
+
 }
