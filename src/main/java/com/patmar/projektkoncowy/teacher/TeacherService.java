@@ -33,7 +33,7 @@ public class TeacherService {
         List<Teacher> allTeachers = teacherRepository.findAll();
         if (allTeachers.size()==0){
             log.info("Teachers' list is empty.");
-            return null;
+            throw new TeacherNotFoundException("Teachers' list is empty.");
         }
         List<TeacherView> teacherViews =
                 allTeachers.stream().map(TeacherMapper.MAPPER::teacherToTeacherView).collect(Collectors.toList());
@@ -49,6 +49,7 @@ public class TeacherService {
     }
 
     public void removeById(Long id) {
+        findTeacherById(id);
         teacherRepository.deleteById(id);
     }
 
@@ -71,7 +72,6 @@ public class TeacherService {
     }
 
     public Teacher findTeacherById(Long id) {
-        //todo change exception, task: SDA-25
-        return teacherRepository.findById(id).orElseThrow(null);
+        return teacherRepository.findById(id).orElseThrow(()->new TeacherNotFoundException("Teacher with id: "+id+" does not exist."));
     }
 }
