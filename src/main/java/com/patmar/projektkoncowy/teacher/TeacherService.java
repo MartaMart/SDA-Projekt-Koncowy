@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,29 +28,30 @@ public class TeacherService {
         classById.setTeacher(teacher);
         teacher.setSchoolClass(classById);
         teacherRepository.save(teacher);
+        log.info("New teacher has been created");
     }
 
     public List<TeacherView> displayAll() {
         List<Teacher> allTeachers = teacherRepository.findAll();
-        if (allTeachers.size()==0){
+        if (allTeachers.isEmpty()) {
             log.info("Teachers' list is empty.");
-            return null;
+            return Collections.emptyList();
         }
         List<TeacherView> teacherViews =
                 allTeachers.stream().map(TeacherMapper.MAPPER::teacherToTeacherView).collect(Collectors.toList());
-        log.info("All teachers have been displayed.");
         return teacherViews;
     }
 
     public TeacherView displayById(Long id) {
         Teacher teacherById = findTeacherById(id);
         TeacherView teacherView = TeacherMapper.MAPPER.teacherToTeacherView(teacherById);
-        log.info("The Teacher with id: "+id+" has been displayed.");
+        log.info("The Teacher with id: " + id + " has been displayed.");
         return teacherView;
     }
 
     public void removeById(Long id) {
         teacherRepository.deleteById(id);
+        log.info("Teacher with id: " + id + " has been updated.");
     }
 
     @Transactional
@@ -66,7 +68,7 @@ public class TeacherService {
     public SchoolClassViewIdAndGrade displayClassForTeacherWithGivenId(Long id) {
         SchoolClass schoolClass = findTeacherById(id).getSchoolClass();
         SchoolClassViewIdAndGrade schoolClassViewIdAndGrade = SchoolClassMapper.MAPPER.mapToIdAndGrade(schoolClass);
-        log.info("Teacher with id: "+ id+" is assign to class: "+schoolClassViewIdAndGrade.getGradeLevel()+"." );
+        log.info("Teacher with id: " + id + " is assign to class: " + schoolClassViewIdAndGrade.getGradeLevel() + ".");
         return schoolClassViewIdAndGrade;
     }
 

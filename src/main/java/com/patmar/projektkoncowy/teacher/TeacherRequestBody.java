@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TeacherRequestBody {
-
     private String name;
     private String surname;
     private String phoneNumber;

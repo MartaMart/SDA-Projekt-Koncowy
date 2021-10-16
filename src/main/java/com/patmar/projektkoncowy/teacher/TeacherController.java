@@ -18,35 +18,32 @@ class TeacherController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody TeacherRequestBody teacher){
+    public void create(@RequestBody TeacherRequestBody teacher) {
         service.create(teacher);
-        log.info("New teacher has been created");
     }
 
     @GetMapping
-    public List<TeacherView> displayAll(){
+    public List<TeacherView> displayAll() {
         return service.displayAll();
     }
 
     @GetMapping("/{id}")
-    public TeacherView displayById(@PathVariable Long id){
+    public TeacherView displayById(@PathVariable Long id) {
         return service.displayById(id);
     }
 
     @PutMapping("/{id}")
-    public void updateById(@PathVariable Long id, @RequestBody TeacherRequestBody body){
-        service.updateById(id,body);
-        log.info("Teacher with id: "+id +" has been updated.");
+    public void updateById(@PathVariable Long id, @RequestBody TeacherRequestBody body) {
+        service.updateById(id, body);
     }
 
     @DeleteMapping("/{id}")
-    public void removeById(@PathVariable Long id){
+    public void removeById(@PathVariable Long id) {
         service.removeById(id);
-        log.info("Teacher with id: "+id +" has been removed.");
     }
 
     @GetMapping("/class/teacher")
-    SchoolClassViewIdAndGrade displayClassForTeacherWithGivenId(@RequestParam Long id){
+    SchoolClassViewIdAndGrade displayClassForTeacherWithGivenId(@RequestParam Long id) {
         return service.displayClassForTeacherWithGivenId(id);
     }
 }
