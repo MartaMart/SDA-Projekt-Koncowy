@@ -1,5 +1,6 @@
 package com.patmar.projektkoncowy.exceptionHandler;
 
+import com.patmar.projektkoncowy.schoolclass.GradeLevelAlreadyExistsException;
 import com.patmar.projektkoncowy.schoolclass.SchoolClassNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,6 +16,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SchoolClassNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     ExceptionBody handleClassNotFoundException(SchoolClassNotFoundException e) {
+        return new ExceptionBody(List.of(e.getMessage()), LocalDateTime.now());
+    }
+
+    @ExceptionHandler(GradeLevelAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    ExceptionBody handleGradeLevelAlreadyExistsException(GradeLevelAlreadyExistsException e){
         return new ExceptionBody(List.of(e.getMessage()), LocalDateTime.now());
     }
 

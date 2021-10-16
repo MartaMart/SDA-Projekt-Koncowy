@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ class SchoolClassController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@RequestBody SchoolClassRequestBody body){
+    void create(@RequestBody @Valid SchoolClassRequestBody body){
         service.create(body);
         log.info("The class has been created");
     }
