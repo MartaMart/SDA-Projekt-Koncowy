@@ -22,45 +22,45 @@ class SchoolClassController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    void create(@RequestBody @Valid SchoolClassRequestBody body){
+    void create(@RequestBody @Valid SchoolClassRequestBody body) {
         service.create(body);
         log.info("The class has been created");
     }
 
     @GetMapping
-    List<SchoolClassView> displayAll(){
+    List<SchoolClassView> displayAll() {
         return service.displayAll();
     }
 
     @GetMapping("/{id}")
-    SchoolClassView displayById(@PathVariable Long id){
+    SchoolClassView displayById(@PathVariable Long id) {
         return service.displayById(id);
     }
 
     @GetMapping("/students/class")
-    Set<Student> displayStudentsByClassId(@RequestParam Long id){
+    Set<Student> displayStudentsByClassId(@RequestParam Long id) {
         return service.displayStudentsByClassId(id);
     }
 
     @GetMapping("/subjects/class")
-    Set<Subject> displaySubjectsByClassId(@RequestParam Long id){
+    Set<Subject> displaySubjectsByClassId(@RequestParam Long id) {
         return service.displaySubjectsByClassId(id);
     }
 
     @GetMapping("/teacher/class")
-    TeacherPersonalDataView displayTeacherForGivenClass(@RequestParam Long id){
+    TeacherPersonalDataView displayTeacherForGivenClass(@RequestParam Long id) {
         return service.displayTeacherForGivenClass(id);
     }
 
     @DeleteMapping("/{id}")
-    void delete(@PathVariable Long id){
+    void delete(@PathVariable Long id) {
         service.delete(id);
-        log.info("The class with id: "+id+" has been removed.");
+        log.info("The class with id: " + id + " has been removed.");
     }
 
     @PutMapping("/{id}")
-    void update(@PathVariable Long id, @RequestBody SchoolClassRequestBody body){
+    void update(@PathVariable Long id, @RequestBody @Valid SchoolClassRequestBody body) {
         service.update(id, body);
-        log.info("The class with id: "+id+" has been updated.");
+        log.info("The class with id: " + id + " has been updated.");
     }
 }

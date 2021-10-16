@@ -28,18 +28,10 @@ public class SchoolClass {
     @JsonIgnore
     private Teacher teacher;
 
-    @OneToMany(
-            mappedBy = "schoolClass",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Student> students;
 
-    @OneToMany(
-            mappedBy = "schoolClass",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Subject> subjects;
 
     public SchoolClass(String gradeLevel) {
