@@ -6,10 +6,11 @@ import org.springframework.stereotype.Component;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-class GradeLevelValidator implements ConstraintValidator<GradeLevelConstraint,String> {
+class GradeLevelValidator implements ConstraintValidator<GradeLevelConstraint, String> {
 
     private final SchoolClassRepository schoolClassRepository;
 
@@ -17,12 +18,13 @@ class GradeLevelValidator implements ConstraintValidator<GradeLevelConstraint,St
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
 
         List<SchoolClass> all = schoolClassRepository.findAll();
-        String searchedGradeLevel =
-                all.stream()
-                        .map(SchoolClass::getGradeLevel)
-                        .filter(e -> e.equalsIgnoreCase(s))
-                        .findFirst()
-                        .orElseThrow(()->new GradeLevelAlreadyExistsException(s));
-        return true;
+        if (all.isEmpty()) {
+            return true;
+        }
+
+        Optional<String> gradeLevelWhichProbablyExist =
+                all.stream().map(SchoolClass::getGradeLevel).filter(e -> e.equalsIgnoreCase(s)).findFirst();
+
+        return gradeLevelWhichProbablyExist.isEmpty();
     }
 }
