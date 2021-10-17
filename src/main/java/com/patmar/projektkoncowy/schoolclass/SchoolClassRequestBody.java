@@ -10,8 +10,3 @@ import lombok.NoArgsConstructor;
 public class SchoolClassRequestBody {
     private String gradeLevel;
 }
-
-
-
-
-

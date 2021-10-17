@@ -9,7 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "classes")
@@ -28,19 +29,11 @@ public class SchoolClass {
     @JsonIgnore
     private Teacher teacher;
 
-    @OneToMany(
-            mappedBy = "schoolClass",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Student> students;
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Student> students = new ArrayList<>();
 
-    @OneToMany(
-            mappedBy = "schoolClass",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    private Set<Subject> subjects;
+    @OneToMany(mappedBy = "schoolClass", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Subject> subjects = new ArrayList<>();
 
     public SchoolClass(String gradeLevel) {
         this.gradeLevel = gradeLevel;

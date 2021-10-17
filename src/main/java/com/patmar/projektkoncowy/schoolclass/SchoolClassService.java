@@ -10,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,17 +26,17 @@ public class SchoolClassService {
     public void create(SchoolClassRequestBody body) {
         SchoolClass schoolClass = SchoolClassMapper.MAPPER.mapToSchoolClass(body);
         repository.save(schoolClass);
+        log.info("The class has been created");
     }
 
     public List<SchoolClassView> displayAll() {
         List<SchoolClass> all = repository.findAll();
-        if (all.size() == 0) {
+        if (all.isEmpty()) {
             log.info("School Classes list is empty.");
-            return null;
+            return Collections.emptyList();
         }
         List<SchoolClassView> views =
                 all.stream().map(SchoolClassMapper.MAPPER::mapToView).collect(Collectors.toList());
-        log.info("All classes have been displayed.");
         return views;
     }
 
@@ -56,8 +58,10 @@ public class SchoolClassService {
             // avoiding deleting teacher automatically when the class is removed
             teacher.setSchoolClass(null);
             repository.deleteById(id);
+            log.info("The class has been created");
         } catch (NullPointerException e) {
             repository.deleteById(id);
+            log.info("The class has been created");
         }
     }
 
@@ -66,20 +70,31 @@ public class SchoolClassService {
         SchoolClass schoolClassToUpdate = findClassById(id);
         SchoolClass schoolClass = SchoolClassMapper.MAPPER.mapToSchoolClass(body);
         schoolClassToUpdate.setGradeLevel(schoolClass.getGradeLevel());
+        log.info("The class has been created");
     }
 
     public SchoolClass findClassById(Long classId) {
         return repository.findById(classId).orElseThrow(() -> new SchoolClassNotFoundException("The class with id: " + classId + " does not exist."));
     }
 
-    public Set<Student> displayStudentsByClassId(Long id) {
-        Set<Student> studentsToDisplay = findClassById(id).getStudents();
+    public List<Student> displayStudentsByClassId(Long id) {
+        List<Student> studentsToDisplay = findClassById(id).getStudents();
+        //info: 'studentToSort' list is created to avoid java.lang.UnsupportedOperationException
+        List<Student> studentsToSort = new ArrayList<>(studentsToDisplay);
+        Comparator<Student> compareByName = (Student s1, Student s2) -> s1.getName().compareToIgnoreCase(s2.getName());
+        Comparator<Student> compareBySurname =
+                (Student s1, Student s2) -> s1.getSurname().compareToIgnoreCase(s2.getSurname());
+        studentsToSort.sort(compareBySurname.thenComparing(compareByName));
         log.info("Students who belong to class with id: " + id + " have been displayed.");
-        return studentsToDisplay;
+        return studentsToSort;
     }
 
-    public Set<Subject> displaySubjectsByClassId(Long id) {
-        Set<Subject> subjectsToDisplay = findClassById(id).getSubjects();
+    public List<Subject> displaySubjectsByClassId(Long id) {
+        List<Subject> subjectsToDisplay = findClassById(id).getSubjects();
+        List<Subject> subjectsToSort = new ArrayList<>(subjectsToDisplay);
+        Comparator<Subject> compareBySubjectName =
+                (Subject s1, Subject s2) -> s1.getSubjectName().compareToIgnoreCase(s2.getSubjectName());
+        subjectsToSort.sort(compareBySubjectName);
         log.info("Subjects who belong to class with id: " + id + " have been displayed.");
         return subjectsToDisplay;
     }
