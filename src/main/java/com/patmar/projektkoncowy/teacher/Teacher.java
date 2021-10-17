@@ -41,5 +41,4 @@ public class Teacher {
         this.email = email;
         this.schoolClass = schoolClass;
     }
-
 }

@@ -1,6 +1,7 @@
 package com.patmar.projektkoncowy.exceptionHandler;
 
 import com.patmar.projektkoncowy.schoolclass.SchoolClassNotFoundException;
+import com.patmar.projektkoncowy.teacher.TeacherNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,6 +28,12 @@ public class GlobalExceptionHandler {
         List<ObjectError> allErrors = e.getBindingResult().getAllErrors();
         List<String> errorMessages = allErrors.stream().map(m -> m.getDefaultMessage()).collect(Collectors.toList());
         return new ExceptionBody(errorMessages, LocalDateTime.now());
+    }
+
+    @ExceptionHandler(TeacherNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    ExceptionBody handleTeacherNotFoundException(TeacherNotFoundException e) {
+        return new ExceptionBody(List.of(e.getMessage()), LocalDateTime.now());
     }
 
 }
