@@ -32,9 +32,10 @@ public class Student {
     @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
 
-    public Student(String name, String surname, String email) {
+    public Student(String name, String surname, String email, Role role) {
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.role = role;
     }
 }

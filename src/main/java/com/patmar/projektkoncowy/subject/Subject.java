@@ -24,4 +24,8 @@ public class Subject {
     @ManyToOne
     @JoinColumn(name = "class_id")
     private SchoolClass schoolClass;
+
+    public Subject(String subjectName) {
+        this.subjectName = subjectName;
+    }
 }
