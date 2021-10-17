@@ -12,7 +12,7 @@ import static com.patmar.projektkoncowy.student.StudentMapper.MAPPER;
 @RequiredArgsConstructor
 public class StudentService {
 
-    private StudentRepository repository;
+    private final StudentRepository repository;
 
     public void addStudent (StudentCreateRequest request) {
         Student student = MAPPER.toStudent(request);
