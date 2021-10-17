@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,6 +16,6 @@ public class SchoolClassView {
     private Long id;
     private String gradeLevel;
     private Teacher teacher;
-    private Set<Student> students;
-    private Set<Subject> subjects;
+    private List<Student> students;
+    private List<Subject> subjects;
 }

@@ -13,7 +13,7 @@ import javax.validation.constraints.Size;
 public class SchoolClassRequestBody {
 
     @NotBlank(message = "Class must not be null and to have white spaces.")
-    @Size(min = 1, max = 2, message = "Class must be beetween 1 and 2 characters long.")
+    @Size(min = 1, max = 2, message = "Class must be between 1 and 2 characters long.")
     @GradeLevelConstraint
     private String gradeLevel;
 }
