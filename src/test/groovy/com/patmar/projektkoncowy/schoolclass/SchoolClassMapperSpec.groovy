@@ -11,10 +11,11 @@ class SchoolClassMapperSpec extends Specification {
         when:
         def schoolClass = classMapper.mapToSchoolClass(schoolClassBody)
         then:
-        schoolClass.getGradeLevel() == schoolClassBody.getGradeLevel()
-        schoolClass.getStudents() == Collections.emptyList()
-        schoolClass.getSubjects() == Collections.emptyList()
-        schoolClass.getTeacher() == null
+        with(schoolClass) {
+            gradeLevel == schoolClassBody.gradeLevel
+            students == Collections.emptyList()
+            subjects == Collections.emptyList()
+            teacher == null}
     }
 
     def "map schoolClass to view"() {
@@ -23,10 +24,12 @@ class SchoolClassMapperSpec extends Specification {
         when:
         def view = classMapper.mapToView(mockSchoolClass)
         then:
-        view.getTeacher() == mockSchoolClass.teacher
-        view.getSubjects() == mockSchoolClass.subjects
-        view.getStudents() == mockSchoolClass.students
-        view.getGradeLevel() == mockSchoolClass.gradeLevel
+        with(view){
+            teacher == mockSchoolClass.teacher
+            subjects == mockSchoolClass.subjects
+            students == mockSchoolClass.students
+            gradeLevel == mockSchoolClass.gradeLevel
+        }
     }
 
     def "map id and grade from SchoolClass"() {
@@ -35,7 +38,9 @@ class SchoolClassMapperSpec extends Specification {
         when:
         def grade = classMapper.mapToIdAndGrade(mockSchoolClass)
         then:
-        grade.getGradeLevel() == mockSchoolClass.gradeLevel
-        grade.getId() == mockSchoolClass.id
+        with(grade){
+            gradeLevel == mockSchoolClass.gradeLevel
+            id == mockSchoolClass.id
+        }
     }
 }
